@@ -1,0 +1,8 @@
+# jks keystore and key password: changethis
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/projectdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
