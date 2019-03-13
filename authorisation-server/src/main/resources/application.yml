@@ -15,7 +15,6 @@ spring:
             clientId: 70732567463-4k841le5j9gf6u6ufvldle1niaf24fcr.apps.googleusercontent.com
             clientSecret: 1RNbuf6djaXlU05f10CVJ_aO
             redirectUriTemplate: http://localhost
-#           apiKey: AIzaSyCDR51QOC4U_eT-lTRUcAIwkj8W1eaH0pU
             scope:
               - email
               - profile
