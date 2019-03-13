@@ -47,6 +47,7 @@ public class VdOAuth2UserService extends DefaultOAuth2UserService {
 
 	public VdOAuth2UserService(UserDetailsManager userDetailsManager) {
 		this.userDetailsManager = userDetailsManager;
+		
 		factory.put("google", google);
 		factory.put("facebook", facebook);
 	}
@@ -59,10 +60,10 @@ public class VdOAuth2UserService extends DefaultOAuth2UserService {
 
 		VdUserDetailsManager vdUserDetailsManager = (VdUserDetailsManager)userDetailsManager;
 		
-		String providerName = userRequest.getClientRegistration().getClientName();
+		String providerName = userRequest.getClientRegistration().getRegistrationId();
 		
 		// every social platform has different naming convention of user name
-		String userName = factory.get(userRequest.getClientRegistration().getClientName()).apply(oAuth2User);
+		String userName = factory.get(providerName).apply(oAuth2User);
 				
 		UserDetails userDetails = vdUserDetailsManager
 				.loadSocialUserByUsername(userName, SocialPlatform.valueOf(providerName.toUpperCase()));

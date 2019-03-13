@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationC
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.userinfo.DelegatingOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -51,12 +52,13 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * If we are provided with access token from google or facebook, then we should return our access token
  * @author mehdi
+ * 
  *
  */
 @RestController
 @RequestMapping("oauth/assert")
 @Slf4j
-public class AssertTokenController implements InitializingBean {
+public class AssertTokenController {
 
 	@Autowired 
 	private RestTemplate template;
@@ -64,19 +66,15 @@ public class AssertTokenController implements InitializingBean {
 	@Autowired
 	private VdUserDetailsManager userDetailsManager;
 	
-	private URI facebookRequestURI = null;
-	private URI googleRequestURI = null;
+	//private URI facebookRequestURI = null;
+	//private URI googleRequestURI = null;
 
-	@Override
+	/*@Override
 	public void afterPropertiesSet() throws Exception {
 		googleRequestURI = new UriTemplate("https://content-people.googleapis.com/v1/people/me?personFields=emailAddresses,genders").expand("");
 		facebookRequestURI = null;		
-	}
-	
-	@Autowired
-	@Qualifier("google")
-	ClientRegistration google;
-	
+	}*/
+
 	@Autowired
 	DelegatingOAuth2UserService<OAuth2UserRequest, OAuth2User> delegatingOAuth2UserService;
 	
@@ -88,9 +86,13 @@ public class AssertTokenController implements InitializingBean {
 	
 	@Autowired
 	TokenEnhancerChain tokenEnhancerChain;
+	
+	@Autowired ClientRegistrationRepository clientRegistrationRepository;
 
 	@GetMapping(path="google/code")
 	public @ResponseBody ResponseEntity<OAuth2AccessToken> googleWithCode(@RequestParam("code") String code) {
+		
+		ClientRegistration google = clientRegistrationRepository.findByRegistrationId("google");
 		
 		OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> client = new DefaultAuthorizationCodeTokenResponseClient();
 		

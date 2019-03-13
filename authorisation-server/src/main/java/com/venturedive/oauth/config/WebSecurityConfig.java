@@ -84,10 +84,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.oauth2Login().userInfoEndpoint().userAuthoritiesMapper(new SimpleAuthorityMapper());
 		
-		http.oauth2Client().clientRegistrationRepository(registrations());
+		//http.oauth2Client().clientRegistrationRepository(registrations());
 	}
 	
-	@Autowired 
+	/*@Autowired 
 	@Qualifier("google")
 	ClientRegistration google;
 	
@@ -101,5 +101,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				return google;
 			}
 		};
-	}
+	}*/
 }
