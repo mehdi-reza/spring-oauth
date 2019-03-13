@@ -2,4 +2,7 @@ target
 .metadata
 .recommenders
 RemoteSystemsTempFiles
+.settings
+.project
+.classpath
 
