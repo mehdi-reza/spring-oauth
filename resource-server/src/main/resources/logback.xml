@@ -13,13 +13,14 @@
       <pattern>%.-1level|%-40.40logger{0}|%msg%n</pattern>
     </encoder>
   </appender>
- 
+
   <logger name="com.venturedive" level="info" />
-  
-  <logger name="org.springframework.security" level="trace" />
-  <logger name="org.springframework.web.client" level="trace" />
-  <logger name="org.apache.http" level="debug"/>
-  
+ 
+  <logger name="org.springframework" level="info" />
+   <logger name="org.springframework.security" level="debug" />
+ 
+  <logger name="org.springframework.beans" level="warn" />
+ 
   <root level="warn">
     <appender-ref ref="console" />
   </root>
